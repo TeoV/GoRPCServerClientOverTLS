@@ -10,14 +10,13 @@ import (
 )
 
 func main() {
-
 	cert, err := tls.LoadX509KeyPair("server1.crt", "server.key")
 	if err != nil {
-		log.Fatalf("server: loadkeys: %s", err)
+		log.Fatalf("Error: %s when load server keys", err)
 	}
 
 	if len(cert.Certificate) != 2 {
-		log.Fatal("server.crt should have 2 concatenated certificates: server + CA")
+		log.Fatal("server1.crt should have 2 concatenated certificates: server + CA")
 	}
 
 	ca, err := x509.ParseCertificate(cert.Certificate[1])
@@ -37,22 +36,22 @@ func main() {
 	service := "127.0.0.1:2012"
 	listener, err := tls.Listen("tcp", service, &config)
 	if err != nil {
-		log.Fatalf("server: listen: %s", err)
+		log.Fatalf("Error: %s when listening", err)
 	}
 
 	if err := rpc.Register(new(MyServer)); err != nil {
 		log.Fatal("Failed to register RPC method")
 	}
 
-	log.Print("server: listening")
+	log.Print("Listening ")
 	for {
 		conn, err := listener.Accept()
 		if err != nil {
-			log.Printf("server: accept: %s", err)
+			log.Printf("Error: %s when acceptiong connection", err)
 			break
 		}
 		defer conn.Close()
-		log.Printf("server: accepted from %s", conn.RemoteAddr())
+		log.Printf("Accept connection from : %s", conn.RemoteAddr())
 		go handleClient(conn)
 	}
 }
@@ -60,7 +59,7 @@ func main() {
 func handleClient(conn net.Conn) {
 	defer conn.Close()
 	rpc.ServeConn(conn)
-	log.Println("server: conn: closed")
+	log.Println("Connection closed")
 }
 
 type MyServer struct{}

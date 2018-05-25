@@ -11,11 +11,11 @@ func main() {
 
 	cert, err := tls.LoadX509KeyPair("client1.crt", "client.key")
 	if err != nil {
-		log.Fatalf("client: loadkeys: %s", err)
+		log.Fatalf("Error: %s when load client keys", err)
 	}
 
 	if len(cert.Certificate) != 2 {
-		log.Fatal("client.crt should have 2 concatenated certificates: client + CA")
+		log.Fatal("client1.crt should have 2 concatenated certificates: client + CA")
 	}
 
 	ca, err := x509.ParseCertificate(cert.Certificate[1])
@@ -34,10 +34,10 @@ func main() {
 
 	conn, err := tls.Dial("tcp", "localhost:2012", &config)
 	if err != nil {
-		log.Fatalf("client: dial: %s", err)
+		log.Fatalf("Error: %s when dialing", err)
 	}
 	defer conn.Close()
-	log.Println("client: connected to: ", conn.RemoteAddr())
+	log.Println("Client connected to :", conn.RemoteAddr())
 	rpcClient := rpc.NewClient(conn)
 	var reply int
 	if err := rpcClient.Call("MyServer.Sum", &ArgsSum{Item1: 13, Item2: 5}, &reply); err != nil {

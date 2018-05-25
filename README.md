@@ -1,14 +1,13 @@
-### GoRPCServerClientOverTLS ###
+## GoRPCServerClientOverTLS ##
 Go RPC Server Client comunicate over TLS + creation script for certificates
 
-### HowToInstall ###
+## Installation ##
 
-Simply run : 
 `go get -v github.com/TeoV/GoRPCServerClientOverTLS`
 
-### HowToUse ###
+## HowToUse ##
 
-+ Run the script : `./script.sh`
++ Run the script : `./script.sh`.
 It will create the following files : 
 	+ Certificate authority files : 
 		+ ca.key
@@ -24,6 +23,6 @@ It will create the following files :
 		+ client.crt
 		+ client1.crt which contains client.crt and ca.crt
 
-+ Start in a terminat the server with `go run server.go`
++ Start in a terminat the server with. `go run server.go`
 
-+ Start in another terminal the client with :  `go run client.go`
++ Start in another terminal the client with.  `go run client.go`
