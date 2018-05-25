@@ -23,6 +23,6 @@ It will create the following files :
 		+ client.crt
 		+ client1.crt which contains client.crt and ca.crt
 
-+ Start in a terminat the server with. `go run server.go`
++ Run `go run server.go` to start the server. 
 
-+ Start in another terminal the client with.  `go run client.go`
++ Run `go run client.go` to connect the client to server. 

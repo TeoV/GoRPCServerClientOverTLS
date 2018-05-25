@@ -1,11 +1,11 @@
 #!/bin/sh
 
 # Generate self signed root CA cert
-openssl req -nodes -x509 -newkey rsa:2048 -keyout ca.key -out ca.crt -subj "/C=AU/ST=NSW/L=Sydney/O=MongoDB/OU=root/CN=localhost/emailAddress=kevinadi@mongodb.com"
+openssl req -nodes -x509 -newkey rsa:2048 -keyout ca.key -out ca.crt -subj "/C=RO/ST=TM/L=Timisoara/O=ITSysCom/OU=root/CN=localhost/emailAddress=teofil.voivozeanu@itsyscom.com"
 
 
 # Generate server cert to be signed
-openssl req -nodes -newkey rsa:2048 -keyout server.key -out server.csr -subj "/C=AU/ST=NSW/L=Sydney/O=MongoDB/OU=server/CN=localhost/emailAddress=kevinadi@mongodb.com"
+openssl req -nodes -newkey rsa:2048 -keyout server.key -out server.csr -subj "/C=RO/ST=TM/L=Timisoara/O=ITSysCom/OU=server/CN=localhost/emailAddress=teofil.voivozeanu@itsyscom.com"
 
 # Sign the server cert
 openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt
@@ -15,7 +15,7 @@ cat server.crt ca.crt > server1.crt
 
 
 # Generate client cert to be signed
-openssl req -nodes -newkey rsa:2048 -keyout client.key -out client.csr -subj "/C=AU/ST=NSW/L=Sydney/O=MongoDB/OU=client/CN=localhost/emailAddress=kevinadi@mongodb.com"
+openssl req -nodes -newkey rsa:2048 -keyout client.key -out client.csr -subj "/C=RO/ST=TM/L=Timisoara/O=ITSysCom/OU=client/CN=localhost/emailAddress=teofil.voivozeanu@itsyscom.com"
 
 # Sign the client cert
 openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAserial ca.srl -out client.crt
